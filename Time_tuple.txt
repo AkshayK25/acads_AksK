@@ -1,0 +1,132 @@
+Introduction to Python Time and Date
+To see how Python handles date and time, let’s first look at some important concepts of Python time. you can refer to our article on Python Datetime Module with Quick Examples
+
+a. Epoch
+The Epoch is the point in time in Python from which time is measured. It is labelled 12:00AM, Jan 1, 1970. It is the beginning of an era.
+
+b. Ticks
+In Python, a tick is a floating-point number in seconds, and it denotes a time interval in Python. Ticks are calculated from the epoch.
+
+c. Daylight Savings Time(DST)
+In Agrarian culture, they set the clocks to be one hour faster. This way, they get up an hour before actual sunrise, and get an hour extra after work. In northern and southern regions, days are considerably longer in the summer. However, in areas around the equator, the difference isn’t that much for DST to be efficient. Hence, not every country implements it. Before proceeding on Python time tuple you may also want to read our article on python tuples.
+
+3. Python Time Tuple
+We represent time in a way that’s easy for us to understand. However, Python stores it in tuples. These python tuples are made of nine numbers.
+
+Index	Field	Domain of Values
+0	Year (4 digits)	Ex.- 1995
+1	Month	1 to 12
+2	Day	1 to 31
+3	Hour	0 to 23
+4	Minute	0 to 59
+5	Second	0 to 61 (60/61 are leap seconds)
+6	Day of Week	0 to 6 (Monday to Sunday)
+7	Day of Year	1 to 366 (Julian day)
+8	DST	-1,0,1
+Leap seconds are added to make up to Earth’s slowing rotation. When DST is 0, it isn’t applied. When it’s 1, it is applied. However, when it is -1, it is up to the library to determine that.
+
+This tuple has an equivalent struct_time structure.
+
+4. Getting the Number of Ticks
+First, we’ll look at the Python ‘time’ module. To use functions from it,  you must import it in your program. See how.
+
+>>> import time
+
+If you wanted to import a single method from ‘time’, you would do it this way.
+
+>>> from time import time
+>>> time()
+1514472272.5830126
+
+To get how many ticks have passed since the epoch, we call the Python time() method.
+
+>>> import time
+>>> time.time()
+1514472318.761928
+
+This is the number of ticks that have yet passed from the epoch. Clearly, this isn’t very human-readable. We can read it, but with only this information, we can’t instantly perceive how much time has passed. Read our article on Python Functions with Syntax and Examples
+
+5. Getting the Local Time
+To get the current time in Python in a more perceivable Python datetime format, we use the localtime() method instead. It returns the Python time according to the area you’re in.
+
+>>> time.localtime()
+time.struct_time(tm_year=2017, tm_mon=12, tm_mday=28, tm_hour=20, tm_min=17, tm_sec=48, tm_wday=3, tm_yday=362, tm_isdst=0)
+This still isn’t completely instantly perceivable. Let’s try something else yet.
+
+6. Getting the Formatted Time
+When we use the asctime() method, we get something much more readable.
+
+>>> time.asctime()
+
+‘Thu Dec 28 20:22:55 2017’
+
+It only takes us about a second to read this and understand.
+
+You can also provide a tuple or a struct_time structure as an argument.
+
+>>> time.asctime(time.localtime())
+
+‘Thu Dec 28 20:24:52 2017’
+
+But the plain time() method doesn’t work with it.
+
+>>> time.asctime(time.time())
+Traceback (most recent call last):
+File "<pyshell#31>", line 1, in <module>
+time.asctime(time.time())
+TypeError: Tuple or struct_time argument required
+
+Read: Python Packages Comprehensive Guide
+
+7. Calendar
+‘calendar’ is yet another module available in Python. It lets you play with monthly and yearly calendars using a variety of functions.
+
+To get the calendar for Dec 2017, we use the month() method.
+
+>>> calendar.month(2017,12)
+
+‘   December 2017\nMo Tu We Th Fr Sa Su\n             1  2  3\n 4  5  6  7  8  9 10\n11 12 13 14 15 16 17\n18 19 20 21 22 23 24\n25 26 27 28 29 30 31\n’
+
+I’m guessing we should use the print function here to make this readable.
+
+>>> print(calendar.month(2017,12))
+
+December 2017
+
+Mo Tu We Th Fr Sa Su
+
+1  2  3
+
+4   5   6   7   8   9  10
+
+11 12 13 14 15 16 17
+
+18 19 20 21 22 23 24
+
+25 26 27 28 29 30 31
+
+8. Methods in the Python time Module
+Do refer Python Method – Classes, Objects and Functions in Python before proceeding.
+
+The three methods we discussed aren’t the only ones applicable on the Python time module. One by one, we’ll see them all.
+
+a. time()
+We already saw this in section 4. Let’s get the number of ticks once again.
+
+>>> time.time()
+
+1514474057.2921965
+
+This method does not take any parameters. And if you set the clock back before making another call to this method, it may return a lower value.
+
+b. localtime()
+This is the second method we discussed in the text. It returns the current time according to your geographical location, in a more readable format.
+
+>>> time.localtime()
+time.struct_time(tm_year=2017, tm_mon=12, tm_mday=28, tm_hour=21, tm_min=2, tm_sec=13, tm_wday=3, tm_yday=362, tm_isdst=0)
+This returns a time tuple.
+
+However, localtime() may take an argument in seconds. Then, it returns a time tuple for that number of seconds from the epoch. First, let’s try providing 0 seconds as an argument.
+
+>>> time.localtime(0)
+time.struct_time(tm_year=1970, tm_mon=1, tm_mday=1, tm_hour=5, tm_min=30, tm_sec=0, tm_wday=3, tm_yday=1, tm_isdst=0)
