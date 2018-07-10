@@ -19,16 +19,20 @@ print("-------------------------------------------------------------------------
 
 # Question 4
 
+# Create numpy array Matrix
+Matrix = np.random.rand(10,1)
+print(A)
 
-def funk(k):
-    f = 1 / (1 + math.exp(-k))
-    r = np.full((10, 1), f)
-    print(r)
-    print("Shape of Matrix_r ->", np.shape(r))
-    print("--------------------------------------------------------------------------------------------")
+# Define the function to be applied
 
 
-funk(2)
+def funk(x):
+    return 1 / (1 + np.exp(-x))
+
+
+#  Apply the function on Matrix
+output = np.apply_along_axis(funk, 0, Matrix)
+print(output)
 
 # Question 3
 print("------------------------------------------------------------------------------------------------")
