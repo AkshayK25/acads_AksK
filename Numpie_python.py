@@ -21,9 +21,10 @@ print("-------------------------------------------------------------------------
 
 # Create numpy array Matrix
 Matrix = np.random.rand(10,1)
-print(A)
+print("--------------------------------------------------------------------------------------------------")
+print(Matrix)
 
-# Define the function to be applied
+# Defination of the function to be applied
 
 
 def funk(x):
@@ -33,6 +34,7 @@ def funk(x):
 #  Apply the function on Matrix
 output = np.apply_along_axis(funk, 0, Matrix)
 print(output)
+print("--------------------------------------------------------------------------------------------------")
 
 # Question 3
 print("------------------------------------------------------------------------------------------------")
